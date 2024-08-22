@@ -3,7 +3,7 @@ import { createFavorite, deleteFavorite, getFavorites } from '../controllers/fav
 
 const router = Router()
 
-router.get('/favorites', getFavorites)
+router.get('/favorites/:id', getFavorites)
 router.post('/favorite', createFavorite)
 router.delete('/favorite/:id', deleteFavorite)
 

@@ -10,7 +10,7 @@ export const login = async (req, res) => {
         ]
     )
     console.log(rows)
-    res.json(rows)
+    return res.json(rows)
 }
 
 export const signup = async (req, res) => {

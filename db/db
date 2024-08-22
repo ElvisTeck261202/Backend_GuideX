@@ -1,0 +1,67 @@
+create database guideX;
+
+use guideX;
+
+create table users(
+	id int primary key auto_increment,
+    username varchar(50),
+    password varchar(50),
+    license_id int
+);
+
+create table cars(
+	id int primary key auto_increment,
+    brand varchar(50),
+    model varchar(50),
+    plate varchar(50),
+    user_id int
+);
+
+create table favorites(
+	id int primary key auto_increment,
+    place_name varchar(50),
+    coord varchar(100),
+    user_id int
+);
+
+create table history (
+	id int primary key auto_increment,
+    date date,
+    from_place varchar(100),
+    to_place varchar(50),
+    user_id int
+);
+
+create table licenses (
+	id int primary key auto_increment,
+    license varchar(50)
+);
+
+alter table users add foreign key (license_id) references licenses(id);
+alter table cars add foreign key (user_id) references users(id);
+alter table favorites add foreign key (user_id) references users(id);
+alter table history add foreign key (user_id) references users(id);
+
+insert into licenses (license) values ("ABCDEF-987654-A1B2C3");
+insert into licenses (license) values ("987654-A1B2C3-ABCDEF");
+insert into licenses (license) values ("A1B2C3-ABCDEF-987654");
+
+insert into users (username, password, license_id) values ("Marcus Fenix", "Marcus123", 1);
+insert into users (username, password, license_id) values ("Dominic Santiago", "Dom123", 2);
+
+insert into cars (brand, model, plate, user_id) values ("Chevrolet", "Mustang", "ABC-123-A", 1);
+insert into cars (brand, model, plate, user_id) values ("Tesla", "Cibertruck", "DEF-456-B", 2);
+
+insert into favorites (place_name, coord, user_id) values ("Paseo Durango", "24.03485488050683, -104.65225825492881", 1);
+insert into favorites (place_name, coord, user_id) values ("Universidad Politecnica de Durango", "24.023961826452563, -104.55295067557321", 2);
+
+insert into history (date, from_place, to_place, user_id) values ("2024-08-12", "Universidad Politecnica de Durango", "Paseo Durango", 1);
+insert into history (date, from_place, to_place, user_id) values ("2024-08-02", "Paseo Durango", "Soriana", 2);
+
+drop database guideX;
+
+select * from users;
+select * from licenses;
+select * from history;
+select * from favorites;
+select * from cars;
