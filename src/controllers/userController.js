@@ -41,3 +41,14 @@ export const signup = async (req, res) => {
         res.json('That License doesn\'t exist ')
     }
 }
+
+export const getUser = async (req, res) => {
+    const connection = await connect();
+    const [results] = await connection.query('SELECT * FROM USERS WHERE id = ?',
+        [
+            req.params.id
+        ]
+    );
+    console.log(results[0])
+    return res.json(results[0])
+}
